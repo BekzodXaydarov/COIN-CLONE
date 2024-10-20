@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import "./Login.css";
 import { IAdmin } from "../../types";
 import { useDispatch } from "react-redux";
-import { setAdmin } from "../../store/admin/admin";
+import { setAdmin } from "../../store/Slices/admin/admin";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

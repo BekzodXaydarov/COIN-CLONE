@@ -3,7 +3,7 @@ import { sidebarItem } from "../../utils";
 import "./Sidebar.css";
 import { IoIosLogOut } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { logOutAdmin } from "../../../store/admin/admin";
+import { logOutAdmin } from "../../../store/Slices/admin/admin";
 
 const Sidebar = () => {
   const { pathname } = useLocation();

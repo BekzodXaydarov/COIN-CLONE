@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import Sidebar from "./components/ui/Sidebar/Sidebar";
 import Navbar from "./components/ui/Navbar/Navbar";
 import { useEffect } from "react";
+import Admin from "./pages/Admin/Admin";
 
 const App = () => {
   const admin = useAdmin();
@@ -20,7 +21,9 @@ const App = () => {
             <Sidebar />
             <main>
               <Navbar />
-              <Routes></Routes>
+              <Routes>
+                <Route path="/" element={<Admin />} />
+              </Routes>
             </main>
         </>
       ) : (

@@ -10,6 +10,7 @@ export interface IAdmin {
 
 export interface IStore {
   admin: IAdmin;
+  modal: boolean
 }
 
 export interface ISidebarItem {
