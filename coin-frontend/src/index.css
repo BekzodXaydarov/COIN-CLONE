@@ -6,6 +6,13 @@
   list-style: none;
 }
 
-body {
+#root {
   background-color: #242424;
+  padding: 10px;
+  height: 100vh;
+  display: flex;
+  gap: 10px;
+}
+#root main {
+  width: 90%;
 }

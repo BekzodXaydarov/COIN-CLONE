@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import "./Login.css";
 import { IAdmin } from "../../types";
+import { useDispatch } from "react-redux";
+import { setAdmin } from "../../store/admin/admin";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -8,8 +11,11 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IAdmin>();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const Submit = (data: IAdmin) => {
-    console.log(data);
+    dispatch(setAdmin({...data,username:"bekzod",is_active:true,email:"test@gmail.com"})) 
+    navigate("/")   
   };
 
   return (

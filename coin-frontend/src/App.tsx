@@ -17,13 +17,11 @@ const App = () => {
     <>
       {admin?.is_active ? (
         <>
-          <div>
             <Sidebar />
-            <div>
+            <main>
               <Navbar />
               <Routes></Routes>
-            </div>
-          </div>
+            </main>
         </>
       ) : (
         <Routes>
