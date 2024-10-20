@@ -1,0 +1,66 @@
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-container form {
+  width: 400px;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.login-container form h1 {
+  color: white;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.login-container form label {
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
+}
+.login-container form input {
+  padding: 10px;
+  background-color: transparent;
+  border: 1px solid white;
+  border-radius: 5px;
+  outline: none;
+  color: white;
+  font-size: 16px;
+}
+.login-container form input::placeholder {
+  color: white;
+}
+
+.login-container form .error_input {
+    border: 2px solid red;
+    color: red;
+}
+.login-container form .error_input::placeholder {
+    color: red;
+}
+
+
+
+.login-container form button[type="submit"] {
+    height: 50px;
+    background-color: white;
+    color: #242424;
+    border: 2px solid  white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: .8s ease-in-out ;
+}
+.login-container form button[type="submit"]:hover {
+    background-color: #242424;
+    color: white;
+    transform: translateY(-5px);
+}
+.login-container form button[type="submit"]:active {
+    transform: scale(0.65);
+}
