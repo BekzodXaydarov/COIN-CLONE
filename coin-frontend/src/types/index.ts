@@ -1,3 +1,4 @@
+import React from "react";
 import { IconType } from "react-icons";
 
 export interface IAdmin {
@@ -10,11 +11,21 @@ export interface IAdmin {
 
 export interface IStore {
   admin: IAdmin;
-  modal: boolean
+  modal: IModal;
 }
 
 export interface ISidebarItem {
-    icon: IconType;
-    title: string;
-    link: string;
+  icon: IconType;
+  title: string;
+  link: string;
+}
+export interface IModal {
+  is_active: boolean;
+  Form: React.ReactNode;
+}
+
+export interface ITable {
+  head: React.ReactNode;
+  body: React.ReactNode;
+  tfoot: React.ReactNode;
 }

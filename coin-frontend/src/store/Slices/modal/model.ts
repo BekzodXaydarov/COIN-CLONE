@@ -2,14 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const Modal = createSlice({
   name: "modal",
-  initialState: false,
+  initialState: { is_active: false, Form: null },
   reducers: {
-    setModal: (state, { payload }) => {
-      state = payload;
-      return payload;
+    Open: (state, { payload }) => {
+      state.is_active = true;
+      state.Form = payload.Form;
+    },
+    Close: (state,_) => {
+      state.is_active = false;
     },
   },
 });
 
-export const { setModal } = Modal.actions;
-export default Modal.reducer
+export const { Open,Close } = Modal.actions;
+export default Modal.reducer;
