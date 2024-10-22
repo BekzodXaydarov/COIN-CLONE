@@ -11,6 +11,8 @@ import { Close } from "./store/Slices/modal/model";
 
 const App = () => {
   const admin = useAdmin();
+  console.log(admin);
+  
   const modal = useModal();
   const dispatch = useDispatch()
   const navigate = useNavigate();

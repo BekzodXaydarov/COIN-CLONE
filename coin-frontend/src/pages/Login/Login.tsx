@@ -4,6 +4,9 @@ import { IAdmin } from "../../types";
 import { useDispatch } from "react-redux";
 import { setAdmin } from "../../store/Slices/admin/admin";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { api } from "../../components/utils";
 
 const Login = () => {
   const {
@@ -13,16 +16,24 @@ const Login = () => {
   } = useForm<IAdmin>();
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const Submit = (data: IAdmin) => {
-    dispatch(setAdmin({...data,username:"bekzod",is_active:true,email:"test@gmail.com"})) 
-    navigate("/")   
+  const Submit = async (data: IAdmin) => {
+    try {
+      const responses = await axios.post(api + "/adminLogin", data)
+      navigate("/")
+      dispatch(setAdmin(responses.data.token))
+      toast.success("Login is successfully")
+
+    }
+    catch (e: any) {
+      toast.error(e.message || "Error")
+    }
   };
 
   return (
     <main className="login-container">
       <form onSubmit={handleSubmit(Submit)}>
         <h1>Auth</h1>
-        <label>Usernmae:</label>
+        <label>Username:</label>
         <input
           type="text"
           placeholder="Enter your username"

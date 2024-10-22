@@ -50,7 +50,7 @@ aside button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
+    padding: 10px;
     background-color: red;
     border: 1px solid red;
     color: white;

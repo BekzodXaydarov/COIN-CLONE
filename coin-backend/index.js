@@ -1,10 +1,12 @@
 const express = require("express");
 const sequelize = require("./config/database");
 const setupSwagger = require("./swagger/swagger");
+const cors = require("cors")
 
 const app = express();
 
 app.use(express.json());
+app.use(cors())
 
 const admin = require("./routes/admin.route");
 app.use("/api", admin);
