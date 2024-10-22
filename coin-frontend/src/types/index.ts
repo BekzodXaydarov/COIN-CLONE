@@ -25,7 +25,6 @@ export interface IModal {
 }
 
 export interface ITable {
-  head: React.ReactNode;
+  head: string[];
   body: React.ReactNode;
-  tfoot: React.ReactNode;
 }

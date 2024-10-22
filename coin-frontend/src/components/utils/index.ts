@@ -7,6 +7,8 @@ import {
 import { FaUserGraduate } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
 
+export const api = "http://localhost:8989/api"
+
 const sidebarItem: ISidebarItem[] = [
   {
     icon: MdAdminPanelSettings,

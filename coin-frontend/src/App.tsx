@@ -20,15 +20,15 @@ const App = () => {
     }
   }, [navigate, admin]);
   const handleModal = () => {
-    if(modal.is_active){
+    if (modal.is_active) {
       dispatch(Close({}))
     }
   }
   return (
     <>
-      {admin?.is_active ? (
-        <>
-          <div className={`app ${modal.is_active && "app-opacity"}`} onClick={handleModal}>
+      <div className={`app ${modal.is_active && "app-opacity"}`} onClick={handleModal}>
+        {admin?.is_active ? (
+          <>
             <Sidebar />
             <main>
               <Navbar />
@@ -36,14 +36,14 @@ const App = () => {
                 <Route path="/" element={<Admin />} />
               </Routes>
             </main>
-          </div>
-          <Modal />
-       </>
-      ) : (
-        <Routes>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      )}
+          </>
+        ) : (
+          <Routes>
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        )}
+      </div>
+      <Modal />
     </>
   );
 };

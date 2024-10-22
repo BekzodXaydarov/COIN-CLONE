@@ -19,4 +19,12 @@ const AdminLoginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+const TeacherSchema = Joi.object({
+  name: Joi.string().required(),
+  lastName: Joi.string().required(),
+  year: Joi.number().required(),
+  phone: Joi.string().required(),
+  direction: Joi.number().required(),
+})
+
 module.exports = { AdminSchema, AdminLoginSchema, Validation };

@@ -33,7 +33,7 @@ const Sidebar = () => {
         </ul>
       </nav>
       <button onClick={handLogOut}>
-        LogOut <IoIosLogOut />{" "}
+        Log out <IoIosLogOut />
       </button>
     </aside>
   );

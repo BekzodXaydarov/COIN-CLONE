@@ -62,5 +62,5 @@
     transform: translateY(-5px);
 }
 .login-container form button[type="submit"]:active {
-    transform: scale(0.65);
+    transform: scale(0.85);
 }
