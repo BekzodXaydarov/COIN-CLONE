@@ -1,13 +1,10 @@
 import { ISidebarItem } from "../../types";
-import {
-  MdAdminPanelSettings,
-  MdGroup,
-  MdSubject,
-} from "react-icons/md";
+import { MdAdminPanelSettings, MdGroup, MdSubject } from "react-icons/md";
 import { FaUserGraduate } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
+import { createForm, updateForm } from "../../pages/Admin/AdminForm/AdminForm";
 
-export const api = "http://localhost:8989/api"
+export const api = "http://localhost:8989/api";
 
 const sidebarItem: ISidebarItem[] = [
   {
@@ -37,4 +34,15 @@ const sidebarItem: ISidebarItem[] = [
   },
 ];
 
-export { sidebarItem };
+const forms = [
+  {
+    name: "createAdmin",
+    form: createForm,
+  },
+  {
+    name: "updateAdmin",
+    form: updateForm
+  }
+];
+
+export { sidebarItem, forms };

@@ -10,12 +10,13 @@
   background-color: #242424;
   padding: 10px;
   height: 100vh;
+  width: 100%;
   display: flex;
   gap: 10px;
 }
 
 .app main {
-  width: 90%;
+  width: 100%;
 }
 
 .app-opacity {

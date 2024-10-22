@@ -2,11 +2,11 @@ import { useForm } from "react-hook-form";
 import "./Login.css";
 import { IAdmin } from "../../types";
 import { useDispatch } from "react-redux";
-import { setAdmin } from "../../store/Slices/admin/admin";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { api } from "../../components/utils";
+import { setAdmin } from "../../store/Slices/admin/admin";
 
 const Login = () => {
   const {
@@ -19,10 +19,9 @@ const Login = () => {
   const Submit = async (data: IAdmin) => {
     try {
       const responses = await axios.post(api + "/adminLogin", data)
-      navigate("/")
       dispatch(setAdmin(responses.data.token))
+      navigate("/")
       toast.success("Login is successfully")
-
     }
     catch (e: any) {
       toast.error(e.message || "Error")

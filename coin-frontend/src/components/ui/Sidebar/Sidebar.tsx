@@ -1,15 +1,25 @@
-import { Link, useLocation } from "react-router-dom";
-import { sidebarItem } from "../../utils";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { api, sidebarItem } from "../../utils";
 import "./Sidebar.css";
 import { IoIosLogOut } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { logOutAdmin } from "../../../store/Slices/admin/admin";
+import axios from "axios";
+import { useAdmin } from "../../../store/useSelector";
 
 const Sidebar = () => {
   const { pathname } = useLocation();
+  const admin = useAdmin()
   const dispatch = useDispatch()
-  const handLogOut = () => {
+  const navigate = useNavigate()
+  const handLogOut = async () => {
+     await axios.put(api + "/admin/" + admin.admin.id,{...admin.admin,is_active:false},{
+      headers:{
+        Authorization: `Bearer ${admin.admin?.token}`
+      }
+     })
      dispatch(logOutAdmin({}))
+     navigate("/login")
   }
   return (
     <aside>

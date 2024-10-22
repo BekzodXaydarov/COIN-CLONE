@@ -1,48 +1,133 @@
 import { useDispatch } from "react-redux";
 import { Open } from "../../store/Slices/modal/model";
-import AdminForm from "./AdminForm/AdminForm";
 import Table from "../../components/ui/Table/Table";
-const admin = [
-  {
-    id: 1,
-    username: "Bekzod",
-    email: "bekzod@gmail.com",
-    is_active: false
-  },
-  {
-    id: 1,
-    username: "Bekzod",
-    email: "bekzod@gmail.com",
-    is_active: true
-  },
-]
+import { useEffect } from "react";
+import { IAdmin } from "../../types";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { api } from "../../components/utils";
+import { useAdmin } from "../../store/useSelector";
+import { setAdmins, updateAdmin } from "../../store/Slices/admin/admin";
+
 const Admin = () => {
+  const admin = useAdmin();
+
   const dispatch = useDispatch();
   const handleModal = () => {
     dispatch(
       Open({
-        Form: <AdminForm />,
+        Form: "createAdmin",
       })
     );
   };
+  const handleUpdate = (item: IAdmin) => {
+    dispatch(
+      Open({
+        Form: "updateAdmin",
+      })
+    );
+    dispatch(updateAdmin(item));
+  };
+  const fetchData = async () => {
+    try {
+      const responses = await axios.get(api + "/admin", {
+        headers: {
+          Authorization: `Bearer ${admin.admin?.token}`,
+        },
+      });
+
+      dispatch(setAdmins(responses.data.admins));
+    } catch (e: any) {
+      toast.error(e.message || "Error");
+    }
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responses = await axios.get(api + "/admin", {
+          headers: {
+            Authorization: `Bearer ${admin.admin?.token}`,
+          },
+        });
+
+        dispatch(setAdmins(responses.data.admins));
+        toast.success("List of Admin");
+      } catch (e: any) {
+        toast.error(e.message || "Error");
+      }
+    };
+    fetchData();
+  }, []);
+  const handleDelete = async (id: number) => {
+    try {
+      await axios.delete(api + "/admin/" + id, {
+        headers: {
+          Authorization: `Bearer ${admin.admin?.token}`,
+        },
+      });
+      fetchData();
+      toast.success("Admin deleted");
+    } catch (e: any) {
+      toast.error(e.message || "Error");
+    }
+  };
   const AdminTable = () => {
-    return admin.map((item, index) => {
-      return <tr key={index}>
-        <td>{item.id}</td>
-        <td>{item.username}</td>
-        <td>{item.email}</td>
-        <td> <button className={item.is_active ? "active" : "unactive"}>{item.is_active ? "active" : "unactive"}</button> </td>
-      </tr>
-    })
-  }
+    return admin?.admins?.map((item, index) => {
+      return (
+        <tr key={index}>
+          <td>{item.id}</td>
+          <td>{item.username}</td>
+          <td>{item.email}</td>
+          <td>
+            <button
+              className={item.is_active ? "active" : "unactive"}
+              onClick={() => handleActive(item)}
+            >
+              {item.is_active ? "active" : "unactive"}
+            </button>
+          </td>
+          <td className="actions">
+            <button
+              className="btn-delete"
+              onClick={() => handleDelete(item.id)}
+            >
+              Delete
+            </button>
+            <button className="btn-update" onClick={() => handleUpdate(item)}>
+              Update
+            </button>
+          </td>
+        </tr>
+      );
+    });
+  };
+  const handleActive = async (data: IAdmin) => {
+    try {
+      await axios.put(
+        api + "/admin/" + data.id,
+        { ...data, is_active: data.is_active ? false : true },
+        {
+          headers: {
+            Authorization: `Bearer ${admin.admin?.token}`,
+          },
+        }
+      );
+      fetchData();
+    } catch (e: any) {
+      toast.error(e.message || "Error");
+    }
+  };
   return (
     <div className="route-container">
       <button className="create-btn" onClick={handleModal}>
         create Admin
       </button>
-      <Table head={['id', 'username', 'email', 'is_active']} body={<AdminTable />} />
+      <Table
+        head={["id", "username", "email", "is_active", "actions"]}
+        body={<AdminTable />}
+        foot={<td>Admin: {admin.admins.length}</td>}
+      />
     </div>
   );
 };
-
 export default Admin;

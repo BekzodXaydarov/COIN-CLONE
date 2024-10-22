@@ -1,29 +1,61 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { api } from "../../../components/utils";
+
+export const setAdmin = createAsyncThunk(
+  "admin/setAdmin",
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(api + "/admin-profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      localStorage.setItem(
+        "admin",
+        JSON.stringify({ ...response.data.admin, token })
+      );
+
+      return { ...response.data.admin, token };
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 const local = localStorage.getItem("admin");
 
 const Admin = createSlice({
   name: "admin",
-  initialState: local ? JSON.parse(local) : {},
+  initialState: {
+    admin: local ? JSON.parse(local) : {},
+    admins: [],
+    updateAdmin: {},
+  },
   reducers: {
-    setAdmin: async (state, { payload }) => {
-      const admin = await axios.get(api + "/admin-profile", {
-        headers: {
-          Authorization: `Bearer ${payload}`
-        }
-      })
-      localStorage.setItem("admin", JSON.stringify({ ...admin.data.admin, token: payload }));
-      state = { ...admin.data.admin, token: payload };
-    },
     logOutAdmin: (state, _) => {
       localStorage.removeItem("admin");
       state.admin = {};
       return state;
     },
+    setAdmins: (state, { payload }) => {
+      state.admins = payload;
+    },
+    updateAdmin: (state, { payload }) => {
+      state.updateAdmin = payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(setAdmin.fulfilled, (_, { payload }) => {
+        return payload;
+      })
+      .addCase(setAdmin.rejected, (_, { payload }) => {
+        console.error("Failed to set admin:", payload);
+      });
   },
 });
 
-export const { setAdmin, logOutAdmin } = Admin.actions;
-export default Admin.reducer
+export const { logOutAdmin, setAdmins, updateAdmin } = Admin.actions;
+export default Admin.reducer;
