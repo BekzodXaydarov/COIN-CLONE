@@ -11,6 +11,9 @@ app.use(cors())
 const admin = require("./routes/admin.route");
 app.use("/api", admin);
 
+const teacher = require("./routes/teacher.route")
+app.use("/api",teacher)
+
 setupSwagger(app);
 
 const PORT = process.env.PORT || 8989;

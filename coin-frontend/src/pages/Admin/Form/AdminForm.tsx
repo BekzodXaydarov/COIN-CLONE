@@ -30,7 +30,6 @@ const createForm = () => {
   };
   const Submit = async (data: IAdmin) => {
     try {
-      data.is_active = data.is_active == "true";
       await axios.post(api + "/admin", data);
       handleClose();
       fetchData();
@@ -42,7 +41,7 @@ const createForm = () => {
   return (
     <>
       <div className="modal-head">
-        <h1 className="modal-title">Create user</h1>
+        <h1 className="modal-title">Create Admin</h1>
         <button className="close-btn" onClick={handleClose}>
           <AiOutlineX />
         </button>
@@ -65,12 +64,7 @@ const createForm = () => {
           placeholder="Password:"
           className="modal-input"
           {...register("password", { required: true })}
-        />
-        <input
-          type="text"
-          placeholder="Active:"
-          className="modal-input"
-          {...register("is_active", { required: true })}
+          style={{ gridColumn: "span 2" }}
         />
         <button className="modal-create" type="submit">
           Create
@@ -87,7 +81,6 @@ const updateForm = () => {
       username: admin.updateAdmin.username,
       email: admin.updateAdmin.email,
       password: "",
-      is_active: admin.updateAdmin.is_active,
     }
   });
   const dispatch = useDispatch();
@@ -108,7 +101,6 @@ const updateForm = () => {
   };
   const Submit = async (data: IAdmin) => {
     try {
-      data.is_active = data.is_active == "true";
       await axios.put(api + "/admin/" + admin.updateAdmin.id, data);
       handleClose();
       fetchData();
@@ -118,43 +110,38 @@ const updateForm = () => {
     }
   };
   return <>
-     <div className="modal-head">
-        <h1 className="modal-title">Update user</h1>
-        <button className="close-btn" onClick={handleClose}>
-          <AiOutlineX />
-        </button>
-      </div>
-      <form onSubmit={handleSubmit(Submit)}>
-        <input
-          type="text"
-          placeholder="Username:"
-          className="modal-input"
-          {...register("username", { required: true })}
-        />
-        <input
-          type="email"
-          placeholder="Email:"
-          className="modal-input"
-          {...register("email", { required: true })}
-        />
-        <input
-          type="text"
-          placeholder="Password:"
-          className="modal-input"
-          {...register("password", { required: true })}
-        />
-        <input
-          type="text"
-          placeholder="Active:"
-          className="modal-input"
-          {...register("is_active", { required: true })}
-        />
-        <button className="modal-create" type="submit">
-          Update
-        </button>
-      </form>
+    <div className="modal-head">
+      <h1 className="modal-title">Update Admin</h1>
+      <button className="close-btn" onClick={handleClose}>
+        <AiOutlineX />
+      </button>
+    </div>
+    <form onSubmit={handleSubmit(Submit)}>
+      <input
+        type="text"
+        placeholder="Username:"
+        className="modal-input"
+        {...register("username", { required: true })}
+      />
+      <input
+        type="email"
+        placeholder="Email:"
+        className="modal-input"
+        {...register("email", { required: true })}
+      />
+      <input
+        type="text"
+        placeholder="Password:"
+        className="modal-input"
+        {...register("password", { required: true })}
+        style={{ gridColumn: "span 2" }}
+      />
+      <button className="modal-create" type="submit">
+        Update
+      </button>
+    </form>
   </>;
 };
 
 
-export { createForm,updateForm};
+export { createForm, updateForm };

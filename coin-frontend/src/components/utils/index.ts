@@ -2,7 +2,7 @@ import { ISidebarItem } from "../../types";
 import { MdAdminPanelSettings, MdGroup, MdSubject } from "react-icons/md";
 import { FaUserGraduate } from "react-icons/fa";
 import { CiUser } from "react-icons/ci";
-import { createForm, updateForm } from "../../pages/Admin/AdminForm/AdminForm";
+import { createForm, updateForm } from "../../pages/Admin/Form/AdminForm";
 
 export const api = "http://localhost:8989/api";
 

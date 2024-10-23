@@ -7,6 +7,7 @@ import Admin from "./pages/Admin/Admin";
 import Modal from "./components/ui/Modal/Modal";
 import { useDispatch } from "react-redux";
 import { Close } from "./store/Slices/modal/model";
+import Teacher from "./pages/Teacher/Teacher";
 
 const App = () => {
   const admin = useAdmin(); 
@@ -20,13 +21,14 @@ const App = () => {
   return (
     <>
       <div className={`app ${modal.is_active && "app-opacity"}`} onClick={handleModal}>
-        {admin?.admin?.is_active == true ? (
+        {admin?.admin?.password  ? (
           <>
             <Sidebar />
             <main>
               <Navbar />
               <Routes>
                 <Route path="/" element={<Admin />} />
+                <Route path="/teacher" element={<Teacher />} />
                 <Route path="/login" element={<Navigate to={'/'} />} />
               </Routes>
             </main>

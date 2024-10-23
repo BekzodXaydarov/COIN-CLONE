@@ -78,14 +78,6 @@ const Admin = () => {
           <td>{item.id}</td>
           <td>{item.username}</td>
           <td>{item.email}</td>
-          <td>
-            <button
-              className={item.is_active ? "active" : "unactive"}
-              onClick={() => handleActive(item)}
-            >
-              {item.is_active ? "active" : "unactive"}
-            </button>
-          </td>
           <td className="actions">
             <button
               className="btn-delete"
@@ -101,29 +93,13 @@ const Admin = () => {
       );
     });
   };
-  const handleActive = async (data: IAdmin) => {
-    try {
-      await axios.put(
-        api + "/admin/" + data.id,
-        { ...data, is_active: data.is_active ? false : true },
-        {
-          headers: {
-            Authorization: `Bearer ${admin.admin?.token}`,
-          },
-        }
-      );
-      fetchData();
-    } catch (e: any) {
-      toast.error(e.message || "Error");
-    }
-  };
   return (
     <div className="route-container">
       <button className="create-btn" onClick={handleModal}>
         create Admin
       </button>
       <Table
-        head={["id", "username", "email", "is_active", "actions"]}
+        head={["id", "username", "email", "actions"]}
         body={<AdminTable />}
         foot={<td>Admin: {admin.admins.length}</td>}
       />

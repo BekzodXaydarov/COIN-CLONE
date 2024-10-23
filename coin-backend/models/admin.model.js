@@ -18,14 +18,12 @@ module.exports = (sequelize,DataTypes)=>{
             type: DataTypes.STRING,
             allowNull: false
         },
-        is_active: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
     })
     Admin.beforeSave(async (admin,option)=>{
-        if(admin.changed("password")){
+        if(admin.changed("password")){            
             admin.password = await bcrypt.hash(admin.password,10)
+            console.log(admin.password);
+            
         }
     })
     return Admin

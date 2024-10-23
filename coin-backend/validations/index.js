@@ -23,8 +23,8 @@ const TeacherSchema = Joi.object({
   name: Joi.string().required(),
   lastName: Joi.string().required(),
   year: Joi.number().required(),
-  phone: Joi.string().required(),
+  phone: Joi.string().required().min(9),
   direction: Joi.number().required(),
 })
 
-module.exports = { AdminSchema, AdminLoginSchema, Validation };
+module.exports = { AdminSchema, AdminLoginSchema,TeacherSchema, Validation };

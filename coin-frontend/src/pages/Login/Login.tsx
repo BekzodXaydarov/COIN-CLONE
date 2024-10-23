@@ -19,7 +19,13 @@ const Login = () => {
   const Submit = async (data: IAdmin) => {
     try {
       const responses = await axios.post(api + "/adminLogin", data)
-      dispatch(setAdmin(responses.data.token))
+      
+      const admin = await axios.get(api + "/admin-profile",{
+        headers:{
+          Authorization: `Bearer ${responses.data?.token}`,
+        }
+      })
+      dispatch(setAdmin({...admin.data.admin,token:responses.data.token}))
       navigate("/")
       toast.success("Login is successfully")
     }

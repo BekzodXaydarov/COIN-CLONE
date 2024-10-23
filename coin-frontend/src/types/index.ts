@@ -1,11 +1,19 @@
 import React from "react";
 import { IconType } from "react-icons";
+
+export interface ITeacher {
+  id: number;
+  name: string;
+  lastName: string;
+  year: number;
+  phone: string;
+}
+
 export interface IAdmin {
   id: number;
   username: string;
   email: string;
   password: string;
-  is_active: boolean | string;
   token: string;
 }
 export interface IAdminStore {
@@ -17,6 +25,7 @@ export interface IAdminStore {
 export interface IStore {
   admin: IAdminStore;
   modal: IModal;
+  teacher: ITeacher[];
 }
 
 export interface ISidebarItem {
