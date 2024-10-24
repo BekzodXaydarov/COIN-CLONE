@@ -23,8 +23,16 @@ const TeacherSchema = Joi.object({
   name: Joi.string().required(),
   lastName: Joi.string().required(),
   year: Joi.number().required(),
-  phone: Joi.string().required().min(9),
+  phone: Joi.string().pattern(/^\+998[0-9]{9}/).required(),
   direction: Joi.number().required(),
 })
 
-module.exports = { AdminSchema, AdminLoginSchema,TeacherSchema, Validation };
+const GroupSchema = Joi.object({
+  teacher_id: Joi.number().required(),
+  room_number: Joi.number().required(),
+  day: Joi.string().required(),
+  time: Joi.string().required(),
+  name: Joi.string().required(),
+})
+
+module.exports = { AdminSchema, AdminLoginSchema, TeacherSchema, GroupSchema, Validation };

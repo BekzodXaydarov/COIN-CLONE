@@ -1,5 +1,5 @@
-module.exports = (sequelize,DataTypes)=>{
-    const Teacher = sequelize.define("Teacher",{
+module.exports = (sequelize, DataTypes) => {
+    const Teacher = sequelize.define("Teacher", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -24,7 +24,13 @@ module.exports = (sequelize,DataTypes)=>{
         direction: {
             type: DataTypes.INTEGER,
             allowNull: false
-        }
+        },
     })
+    Teacher.associate = (models) => {
+        Teacher.hasMany(models.Group, {
+            foreignKey: "teacher_id",
+            as: "group"
+        })
+    }
     return Teacher
 }

@@ -22,7 +22,6 @@ exports.loginAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;
     const admin = await Admin.findOne({ username });
-    console.log(req.body);
     if (!admin) {
       return res.status(401).json({
         success: false,
